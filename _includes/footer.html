@@ -1,0 +1,39 @@
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>中华文化·高科技</h4>
+                <p>传承文化精髓，引领科技创新</p>
+            </div>
+            <div class="footer-section">
+                <h4>快速链接</h4>
+                <ul>
+                    <li><a href="{{ site.baseurl }}/">首页</a></li>
+                    <li><a href="{{ site.baseurl }}/#about">关于我们</a></li>
+                    <li><a href="{{ site.baseurl }}/#culture">文化传承</a></li>
+                    <li><a href="{{ site.baseurl }}/#technology">科技创新</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>关注我们</h4>
+                <div class="social-links">
+                    {% if site.social.wechat %}
+                    <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                    {% endif %}
+                    {% if site.social.weibo %}
+                    <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
+                    {% endif %}
+                    {% if site.social.linkedin %}
+                    <a href="https://linkedin.com/in/{{ site.social.linkedin }}" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    {% endif %}
+                    {% if site.social.github %}
+                    <a href="https://github.com/{{ site.social.github }}" class="social-link"><i class="fab fa-github"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,86 @@
+# Site settings
+title: "Chinese Culture in High Tech"
+description: "Bridging Tradition and Innovation - Explore the fascinating intersection of Chinese culture and high technology"
+author: "Chinese Culture in High Tech Team"
+email: "info@chineseculturehightech.com"
+url: "https://yourusername.github.io"
+baseurl: "/chinese-culture-high-tech"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+timezone: Asia/Shanghai
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:collection/:title/
+  projects:
+    output: true
+    permalink: /:collection/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Chinese Culture in High Tech Team"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+      author: "Chinese Culture in High Tech Team"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+# Pagination
+paginate: 5
+paginate_path: "/page/:num/"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - package.json
+  - package-lock.json
+  - .gitignore
+  - README.md
+  - DEPLOYMENT.md
+  - PROJECT_SUMMARY.md
+  - quick-start.sh
+  - vendor
+  - .bundle
+
+# Include
+include:
+  - _pages
+  - _projects
+
+# Social media
+social:
+  github: yourusername
+  twitter: yourusername
+  linkedin: yourusername
+  weibo: yourusername
+  wechat: yourusername
+
+# SEO
+google_analytics: UA-XXXXXXXXX-X
+google_verification: your-verification-code
+bing_verification: your-bing-verification-code
+
+# Sitemap
+sitemap:
+  changefreq: weekly
+  priority: 0.8

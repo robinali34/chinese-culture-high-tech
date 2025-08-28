@@ -4,17 +4,14 @@
   "description": "A modern website showcasing the intersection of Chinese culture and high technology",
   "main": "index.html",
   "scripts": {
-    "start": "serve .",
-    "dev": "live-server --port=8000",
-    "build": "npm run build:css && npm run build:js",
-    "build:css": "cleancss -o css/style.min.css css/style.css && cleancss -o css/responsive.min.css css/responsive.css",
-    "build:js": "uglifyjs js/main.js -o js/main.min.js",
-    "lint:css": "stylelint css/*.css",
-    "lint:js": "eslint js/*.js",
-    "test": "npm run lint:css && npm run lint:js",
-    "deploy": "npm run build && git add . && git commit -m 'Build and deploy' && git push",
-    "serve": "serve .",
-    "analyze": "lighthouse http://localhost:8000 --output html --output-path ./lighthouse-report.html"
+    "start": "bundle exec jekyll serve",
+    "dev": "bundle exec jekyll serve --livereload",
+    "build": "bundle exec jekyll build",
+    "build:prod": "JEKYLL_ENV=production bundle exec jekyll build",
+    "clean": "bundle exec jekyll clean",
+    "doctor": "bundle exec jekyll doctor",
+    "serve": "bundle exec jekyll serve",
+    "deploy": "npm run build:prod && git add . && git commit -m 'Build and deploy' && git push"
   },
   "keywords": [
     "chinese-culture",

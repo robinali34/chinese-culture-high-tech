@@ -1,278 +1,156 @@
-# Deployment Guide - Chinese Culture in High Tech Website
+# 部署指南 - Deployment Guide
 
-This guide will help you deploy your website to GitHub Pages and other hosting platforms.
+## 🚀 GitHub Pages 部署
 
-## 🚀 GitHub Pages Deployment
+### 自动部署 (推荐)
 
-### Prerequisites
-- A GitHub account
-- Git installed on your local machine
-- Basic knowledge of Git commands
+项目已配置 GitHub Actions 工作流，推送代码到 main 分支时会自动构建和部署。
 
-### Step 1: Create GitHub Repository
-
-1. Go to [GitHub](https://github.com) and sign in
-2. Click the "+" icon in the top right corner and select "New repository"
-3. Repository name: `chinese-culture-high-tech` (or your preferred name)
-4. Description: "A website showcasing the intersection of Chinese culture and high technology"
-5. Make it **Public** (required for free GitHub Pages)
-6. Don't initialize with README (we already have one)
-7. Click "Create repository"
-
-### Step 2: Push Your Code to GitHub
-
-```bash
-# Initialize Git repository (if not already done)
-git init
-
-# Add all files
-git add .
-
-# Make initial commit
-git commit -m "Initial commit: Chinese Culture in High Tech website"
-
-# Add remote origin (replace YOUR_USERNAME with your GitHub username)
-git remote add origin https://github.com/YOUR_USERNAME/chinese-culture-high-tech.git
-
-# Push to main branch
-git push -u origin main
-```
-
-### Step 3: Enable GitHub Pages
-
-1. Go to your repository on GitHub
-2. Click on "Settings" tab
-3. Scroll down to "Pages" section in the left sidebar
-4. Under "Source", select "Deploy from a branch"
-5. Choose "main" branch and "/ (root)" folder
-6. Click "Save"
-
-Your site will be available at: `https://YOUR_USERNAME.github.io/chinese-culture-high-tech`
-
-### Step 4: Custom Domain (Optional)
-
-1. In the Pages settings, enter your custom domain
-2. Create a `CNAME` file in your repository root with your domain
-3. Configure DNS with your domain provider:
-   - Add a CNAME record pointing to `YOUR_USERNAME.github.io`
-   - Or add A records pointing to GitHub's IP addresses
-
-## 🌐 Alternative Hosting Options
-
-### Netlify
-
-1. Go to [Netlify](https://netlify.com) and sign up
-2. Click "New site from Git"
-3. Connect your GitHub repository
-4. Build command: leave empty (static site)
-5. Publish directory: leave as root
-6. Click "Deploy site"
-
-### Vercel
-
-1. Go to [Vercel](https://vercel.com) and sign up
-2. Click "New Project"
-3. Import your GitHub repository
-4. Framework preset: "Other"
-5. Click "Deploy"
-
-### Firebase Hosting
-
-1. Install Firebase CLI: `npm install -g firebase-tools`
-2. Login: `firebase login`
-3. Initialize: `firebase init hosting`
-4. Deploy: `firebase deploy`
-
-## 🔧 Local Development
-
-### Using Python
-
-```bash
-# Python 3
-python -m http.server 8000
-
-# Python 2
-python -m SimpleHTTPServer 8000
-```
-
-### Using Node.js
-
-```bash
-# Install serve globally
-npm install -g serve
-
-# Serve the site
-serve .
-
-# Or use npx
-npx serve .
-```
-
-### Using PHP
-
-```bash
-php -S localhost:8000
-```
-
-## 📱 Testing Your Deployment
-
-### Cross-Browser Testing
-- Chrome, Firefox, Safari, Edge
-- Mobile browsers (iOS Safari, Chrome Mobile)
-- Test responsive design on different screen sizes
-
-### Performance Testing
-- [Google PageSpeed Insights](https://pagespeed.web.dev/)
-- [GTmetrix](https://gtmetrix.com/)
-- [WebPageTest](https://www.webpagetest.org/)
-
-### Accessibility Testing
-- [WAVE Web Accessibility Evaluator](https://wave.webaim.org/)
-- [axe DevTools](https://www.deque.com/axe/)
-- Screen reader testing
-
-## 🔄 Continuous Deployment
-
-### GitHub Actions (Recommended)
-
-Create `.github/workflows/deploy.yml`:
-
-```yaml
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v3
-    
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: .
-```
-
-### Automatic Updates
-
-1. Make changes to your code
-2. Commit and push to GitHub
-3. GitHub Actions will automatically deploy to Pages
-4. Your site updates within minutes
-
-## 🛠️ Troubleshooting
-
-### Common Issues
-
-**Site not loading:**
-- Check if GitHub Pages is enabled
-- Verify repository is public
-- Check for build errors in Actions tab
-
-**CSS/JS not loading:**
-- Ensure file paths are correct
-- Check for 404 errors in browser console
-- Verify file permissions
-
-**Mobile issues:**
-- Test responsive design
-- Check viewport meta tag
-- Test touch interactions
-
-### Performance Optimization
-
-1. **Minify CSS/JS:**
+1. **推送代码到 GitHub**
    ```bash
-   npm install -g clean-css-cli uglify-js
-   cleancss -o css/style.min.css css/style.css
-   uglifyjs js/main.js -o js/main.min.js
+   git add .
+   git commit -m "Update site with Jekyll support"
+   git push origin main
    ```
 
-2. **Optimize Images:**
-   - Use WebP format
-   - Compress images
-   - Implement lazy loading
+2. **启用 GitHub Pages**
+   - 进入 GitHub 仓库设置
+   - 找到 "Pages" 选项
+   - 选择 "GitHub Actions" 作为部署源
 
-3. **Enable Compression:**
-   - Gzip compression on server
-   - Brotli compression (if supported)
+3. **等待部署完成**
+   - GitHub Actions 会自动构建 Jekyll 站点
+   - 部署完成后，网站将在 `https://yourusername.github.io/chinese-culture-high-tech` 上可用
 
-## 📊 Analytics and Monitoring
+### 手动部署
 
-### Google Analytics
-1. Create Google Analytics account
-2. Add tracking code to your HTML
-3. Monitor visitor behavior and performance
+如果需要手动部署，可以按以下步骤操作：
 
-### GitHub Insights
-- View traffic statistics
-- Monitor popular content
-- Track referrer sources
+1. **本地构建**
+   ```bash
+   ./deploy.sh build
+   ```
 
-## 🔒 Security Considerations
+2. **上传到 GitHub Pages**
+   - 将 `_site` 目录中的内容上传到 `gh-pages` 分支
+   - 或在仓库设置中启用 GitHub Pages 并选择分支
 
-1. **HTTPS Only:**
-   - GitHub Pages provides HTTPS by default
-   - Force HTTPS redirects if needed
+## 🔧 本地开发
 
-2. **Content Security Policy:**
-   - Add CSP headers
-   - Restrict resource loading
+### 启动本地服务器
 
-3. **Regular Updates:**
-   - Keep dependencies updated
-   - Monitor security advisories
+```bash
+./deploy.sh serve
+```
 
-## 📈 Scaling Considerations
+网站将在 `http://localhost:4000` 上运行，支持实时重载。
 
-### For High Traffic
-- Consider CDN services (Cloudflare, AWS CloudFront)
-- Implement caching strategies
-- Monitor performance metrics
+### 构建生产版本
 
-### For Dynamic Content
-- Consider server-side rendering
-- Implement API endpoints
-- Use database for content management
+```bash
+./deploy.sh build
+```
 
-## 🎯 Next Steps
+构建后的文件将生成在 `_site` 目录中。
 
-After successful deployment:
+### 清理构建文件
 
-1. **SEO Optimization:**
-   - Submit sitemap to search engines
-   - Optimize meta tags
-   - Implement structured data
+```bash
+./deploy.sh clean
+```
 
-2. **Content Management:**
-   - Regular content updates
-   - Blog/news section
-   - User engagement features
+## 📁 项目结构
 
-3. **Advanced Features:**
-   - Search functionality
-   - User authentication
-   - Content management system
+```
+chinese-culture-high-tech/
+├── _config.yml          # Jekyll 配置文件
+├── _layouts/            # 页面布局模板
+├── _includes/           # 可重用的页面组件
+├── _posts/              # 博客文章
+├── _pages/              # 静态页面
+├── css/                 # 样式文件
+├── js/                  # JavaScript 文件
+├── images/              # 图片资源
+├── .github/workflows/   # GitHub Actions 配置
+└── index.html           # 首页
+```
 
-## 📞 Support
+## 🌐 自定义域名
 
-If you encounter issues:
+如果需要使用自定义域名：
 
-1. Check GitHub Pages documentation
-2. Review browser console for errors
-3. Test locally first
-4. Check file permissions and paths
-5. Verify all dependencies are loaded
+1. 在 GitHub Pages 设置中添加自定义域名
+2. 创建 `CNAME` 文件，内容为你的域名
+3. 配置 DNS 记录指向 GitHub Pages
+
+## 📝 添加新内容
+
+### 创建新博客文章
+
+在 `_posts/` 目录中创建新的 Markdown 文件：
+
+```markdown
+---
+layout: post
+title: "文章标题"
+date: 2024-01-01
+categories: [分类]
+tags: [标签1, 标签2]
+author: "作者名"
+---
+
+文章内容...
+```
+
+### 创建新页面
+
+在 `_pages/` 目录中创建新的 HTML 文件：
+
+```html
+---
+layout: default
+title: "页面标题"
+description: "页面描述"
+permalink: /page-url/
+---
+
+页面内容...
+```
+
+## 🔍 故障排除
+
+### 常见问题
+
+1. **构建失败**
+   - 检查 `_config.yml` 语法
+   - 确保所有必要的插件已安装
+   - 查看构建日志中的错误信息
+
+2. **页面显示 404**
+   - 检查 `permalink` 设置
+   - 确保文件路径正确
+   - 验证 Jekyll 配置
+
+3. **样式不显示**
+   - 检查 CSS 文件路径
+   - 确保 `baseurl` 设置正确
+   - 验证文件是否被正确复制到 `_site` 目录
+
+### 获取帮助
+
+如果遇到问题，可以：
+
+1. 查看 Jekyll 官方文档
+2. 检查 GitHub Actions 构建日志
+3. 在 GitHub Issues 中提问
+
+## 📚 相关链接
+
+- [Jekyll 官方文档](https://jekyllrb.com/)
+- [GitHub Pages 文档](https://pages.github.com/)
+- [GitHub Actions 文档](https://docs.github.com/en/actions)
+- [Jekyll 主题](https://jekyllthemes.io/)
 
 ---
 
-**Happy Deploying! 🚀**
-
-Your Chinese Culture in High Tech website is now ready to reach audiences worldwide!
+**传承文化精髓，引领科技创新** 🐉⚡

@@ -1,0 +1,68 @@
+---
+layout: default
+title: "博客 - 中华文化·高科技"
+description: "阅读关于中华文化与高科技融合的最新文章和见解"
+permalink: /blog/
+---
+
+<section class="blog-page">
+    <div class="container">
+        <div class="section-header">
+            <h1 class="section-title">博客文章</h1>
+            <p class="section-subtitle">Blog Posts</p>
+        </div>
+        
+        <div class="blog-grid">
+            {% for post in site.posts %}
+            <article class="blog-card">
+                <div class="blog-card-content">
+                    <h2 class="blog-card-title">
+                        <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                    </h2>
+                    <div class="blog-card-meta">
+                        <span class="blog-card-date">
+                            <i class="fas fa-calendar"></i>
+                            {{ post.date | date: "%Y年%m月%d日" }}
+                        </span>
+                        {% if post.author %}
+                        <span class="blog-card-author">
+                            <i class="fas fa-user"></i>
+                            {{ post.author }}
+                        </span>
+                        {% endif %}
+                    </div>
+                    <div class="blog-card-excerpt">
+                        {{ post.excerpt | default: post.content | strip_html | truncatewords: 30 }}
+                    </div>
+                    <div class="blog-card-footer">
+                        {% if post.categories %}
+                        <div class="blog-card-categories">
+                            {% for category in post.categories %}
+                            <span class="category-tag">{{ category }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <a href="{{ post.url | prepend: site.baseurl }}" class="read-more">阅读更多</a>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        
+        {% if paginator.total_pages > 1 %}
+        <div class="pagination">
+            {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="prev">&laquo; 上一页</a>
+            {% endif %}
+            
+            <span class="page-number">
+                第 {{ paginator.page }} 页，共 {{ paginator.total_pages }} 页
+            </span>
+            
+            {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path | prepend: site.baseurl }}" class="next">下一页 &raquo;</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
