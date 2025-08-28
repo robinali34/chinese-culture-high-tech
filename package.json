@@ -1,0 +1,62 @@
+{
+  "name": "chinese-culture-high-tech",
+  "version": "1.0.0",
+  "description": "A modern website showcasing the intersection of Chinese culture and high technology",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "dev": "live-server --port=8000",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "cleancss -o css/style.min.css css/style.css && cleancss -o css/responsive.min.css css/responsive.css",
+    "build:js": "uglifyjs js/main.js -o js/main.min.js",
+    "lint:css": "stylelint css/*.css",
+    "lint:js": "eslint js/*.js",
+    "test": "npm run lint:css && npm run lint:js",
+    "deploy": "npm run build && git add . && git commit -m 'Build and deploy' && git push",
+    "serve": "serve .",
+    "analyze": "lighthouse http://localhost:8000 --output html --output-path ./lighthouse-report.html"
+  },
+  "keywords": [
+    "chinese-culture",
+    "high-technology",
+    "static-website",
+    "responsive-design",
+    "modern-web",
+    "cultural-heritage",
+    "innovation",
+    "github-pages"
+  ],
+  "author": "Chinese Culture in High Tech Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/chinese-culture-high-tech.git"
+  },
+  "homepage": "https://yourusername.github.io/chinese-culture-high-tech",
+  "bugs": {
+    "url": "https://github.com/yourusername/chinese-culture-high-tech/issues"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.2",
+    "eslint": "^8.57.0",
+    "live-server": "^1.2.2",
+    "serve": "^14.2.1",
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard": "^36.0.0",
+    "uglify-js": "^3.17.4"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "dependencies": {},
+  "optionalDependencies": {
+    "lighthouse": "^11.6.0"
+  }
+}
